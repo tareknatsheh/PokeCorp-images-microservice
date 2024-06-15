@@ -1,4 +1,3 @@
-import io
 from fastapi import FastAPI
 from routes import images
 
