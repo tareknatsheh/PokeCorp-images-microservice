@@ -4,18 +4,18 @@ services:
   api:
     build: ./
     ports:
-      - 8003:8000
+      - 8002:8000
     depends_on:
       - db
     environment:
-      - MONGODB_URI=mongodb://db/pokly
+      - MONGODB_URI=mongodb://db/pokmg
   
   db:
     image: mongo:4.0-xenial
     ports:
-      - 27017:27017
+      - 27018:27017 # only for development and debugging
     volumes:
-      - pokly:/data/db
+      - pokmg:/data/db
 
 volumes:
-  pokly:
+  pokmg:

@@ -6,7 +6,7 @@ from pymongo import MongoClient
 import gridfs
 import base64
 
-client = MongoClient("mongodb://localhost:5003/")
+client = MongoClient("mongodb://localhost:27018/")
 cursor = client["PokeCorpDB"]
 fs = gridfs.GridFS(cursor)
 
@@ -42,9 +42,9 @@ def get_pok_img_url_by_id(pokemon_id):
         return res["sprites"]["front_default"]
 
 if __name__ == "__main__":
-    # for pok_id in range(101,153):
-    pok_id = 1
-    print(pok_id)
-    img_url = get_pok_img_url_by_id(pok_id)
-    store_image_in_mongodb(img_url, pok_id)
+    for pok_id in range(1,101):
+        # pok_id = 1
+        print(pok_id)
+        img_url = get_pok_img_url_by_id(pok_id)
+        store_image_in_mongodb(img_url, pok_id)
 
