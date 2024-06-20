@@ -1,7 +1,15 @@
 
-from gridfs import GridFS
+import gridfs
+from pymongo import MongoClient
+from decouple import config
 
-def find_and_delete(fs: GridFS, pokemon_id: int):
+def get_mongo_client() -> MongoClient:
+    return MongoClient(str(config("MONGODB_URI")))
+
+def get_gridfs(mongo_client: MongoClient) -> gridfs.GridFS:
+    return gridfs.GridFS(mongo_client["PokeCorpDB"])
+
+def find_and_delete(fs: gridfs.GridFS, pokemon_id: int):
     # Find the image by pokemon_id (filename)
     file = fs.find_one({"filename": str(pokemon_id)})
     if not file:
