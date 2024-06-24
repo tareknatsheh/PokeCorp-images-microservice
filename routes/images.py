@@ -77,11 +77,10 @@ async def upload_image(
         else:
             logger.info(f"No previous older img was found for {pokemon_id}")
 
-        image_bytes = str.encode(filedata)  # convert string to bytes
-        img_recovered = base64.b64decode(image_bytes)  # decode base64string
+        image_bytes = base64.b64decode(filedata)  # decode base64string
 
         new_image_name = f"{pokemon_id}"
-        fs.put(img_recovered, filename=new_image_name)
+        fs.put(image_bytes, filename=new_image_name)
 
         return {
             "new_image_name": new_image_name,
