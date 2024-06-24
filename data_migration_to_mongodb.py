@@ -1,10 +1,11 @@
 from utils.helping_functions import get_pok_img_url_by_id, store_image_in_mongodb
 
 if __name__ == "__main__":
+    from decouple import config
     from pymongo import MongoClient
     import gridfs
 
-    client = MongoClient("mongodb://localhost:27018/")
+    client = MongoClient(str(config("MONGODB_URI")))
     cursor = client["PokeCorpDB"]
     fs = gridfs.GridFS(cursor)
 
